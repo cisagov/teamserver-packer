@@ -10,7 +10,7 @@
           "volume_type": "gp2"
         }
       ],
-      "ami_name": "example-hvm-{{timestamp}}-x86_64-ebs",
+      "ami_name": "teamserver-hvm-{{timestamp}}-x86_64-ebs",
       "ami_regions": "",
       "associate_public_ip_address": true,
       "encrypt_boot": true,
@@ -45,13 +45,13 @@
         }
       },
       "tags": {
-        "Application": "Example",
+        "Application": "COOL",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "GitHub_Release_URL": "{{user `github_release_url`}}",
         "OS_Version": "Debian Buster",
         "Pre_Release": "{{user `github_is_prerelease`}}",
         "Release": "{{user `github_release_tag`}}",
-        "Team": "CISA - Development"
+        "Team": "VM Fusion - Development"
       },
       "type": "amazon-ebs",
       "vpc_filter": {
@@ -65,10 +65,6 @@
     {
       "ansible_env_vars": [
         "AWS_DEFAULT_REGION={{user `build_region`}}"
-      ],
-      "groups": [
-        "aws",
-        "example"
       ],
       "playbook_file": "src/playbook.yml",
       "type": "ansible"
