@@ -1,0 +1,13 @@
+---
+- hosts: all
+  name: Install VNC
+  become: yes
+  become_method: sudo
+  roles:
+    - vnc
+  vars:
+    # The username, password, and ssh keys for the VNC user
+    username: "{{ lookup('aws_ssm', '/vnc/username') }}"
+    password: "{{ lookup('aws_ssm', '/vnc/password') }}"
+    public_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_public_key') }}"
+    private_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_private_key') }}"
