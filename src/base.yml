@@ -11,4 +11,5 @@
     - persist_journald
     - htop
     - clamav
+    - xfce
     - xfce_cool

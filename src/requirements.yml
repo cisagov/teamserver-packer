@@ -24,5 +24,7 @@
   name: upgrade
 - src: https://github.com/cisagov/ansible-role-vnc-server
   name: vnc
+- src: https://github.com/cisagov/ansible-role-xfce
+  name: xfce
 - src: https://github.com/cisagov/ansible-role-xfce-cool
   name: xfce_cool
