@@ -98,24 +98,21 @@ module "iam_user" {
   }
 }
 
-# Ensure that the test user is allowed to assume the bucket read-only
-# roles
-data "aws_iam_policy_document" "assume_bucket_role" {
-  statement {
-    effect = "Allow"
+# Attach 3rd party S3 bucket read-only policy from
+# cisagov/ansible-role-cobalt-strike to the production EC2AMICreate
+# role
+resource "aws_iam_role_policy_attachment" "thirdpartybucketread_production" {
+  provider = aws.images-production-ami
 
-    actions = [
-      "sts:AssumeRole",
-      "sts:TagSession",
-    ]
-
-    resources = [
-      data.terraform_remote_state.ansible_role_cobalt_strike.outputs.production_role.arn,
-      data.terraform_remote_state.ansible_role_cobalt_strike.outputs.staging_role.arn,
-    ]
-  }
+  policy_arn = data.terraform_remote_state.ansible_role_cobalt_strike.outputs.production_policy.arn
+  role       = module.iam_user.ec2amicreate_role_production.name
 }
-resource "aws_iam_user_policy" "assume_bucket_role" {
-  policy = data.aws_iam_policy_document.assume_bucket_role.json
-  user   = module.iam_user.user.name
+
+# Attach 3rd party S3 bucket read-only policy from
+# cisagov/ansible-role-cobalt-strike to the staging EC2AMICreate role
+resource "aws_iam_role_policy_attachment" "thirdpartybucketread_staging" {
+  provider = aws.images-staging-ami
+
+  policy_arn = data.terraform_remote_state.ansible_role_cobalt_strike.outputs.staging_policy.arn
+  role       = module.iam_user.ec2amicreate_role_staging.name
 }
