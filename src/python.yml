@@ -1,0 +1,20 @@
+---
+- hosts: all
+  name: Install pip3/python3 and remove pip2/python2
+  become: yes
+  become_method: sudo
+  roles:
+    - pip
+    - python
+  tasks:
+    - name: Remove python2 installation
+      package:
+        name:
+          - python
+          - python-dev
+          # This is the package that actually provides
+          # /usr/bin/python.  We want /usr/bin/python to not exist,
+          # since if it does then Ansible will use it as its python.
+          - python-minimal
+          - python-pip
+        state: absent
