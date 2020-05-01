@@ -43,12 +43,12 @@
           - dir_name: "CobaltStrike-Toolkit"
             repo: |
               https://github.com/killswitch-GUI/CobaltStrike-Toolkit/tarball/master
-          - dir_name: "Malleable-CS-Profiles"
+          - dir_name: "Malleable-C2-Profiles"
             repo: |
-              https://github.com/rsmudge/Malleable-CS-Profiles/tarball/master
+              https://github.com/rsmudge/Malleable-C2-Profiles/tarball/master
           - dir_name: "Malleable-C2-Randomizer"
             repo: |
-              https://github.com/bluescreenofjeff/Malleable-C2-Randomizer/tarball/master
+              https://github.com/bluscreenofjeff/Malleable-C2-Randomizer/tarball/master
     - name: Install mono for the manually installed packages that need it
       package:
         name:
