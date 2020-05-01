@@ -35,7 +35,7 @@
             label: "{{ item.repo }}"
       vars:
         # Group ownership for the tools that are installed directly to /tools
-        group: vnc
+        group: operator
         # Base directory where all manually-installed tools will be installed
         manually_installed_tools_base_dir: "/tools"
         # Tools to be manually installed

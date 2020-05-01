@@ -11,3 +11,18 @@
     password: "{{ lookup('aws_ssm', '/vnc/password') }}"
     public_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_public_key') }}"
     private_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_private_key') }}"
+
+- hosts: all
+  name: Add VNC user to operator group
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Add VNC user to operator group
+      user:
+        append: yes
+        groups:
+          - operator
+        name: "{{ username }}"
+  vars:
+    # The username for the VNC user
+    username: "{{ lookup('aws_ssm', '/vnc/username') }}"
