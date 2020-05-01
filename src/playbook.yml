@@ -2,6 +2,9 @@
 - name: Import base image playbook
   import_playbook: base.yml
 
+- name: Import UFW playbook
+  import_playbook: ufw.yml
+
 - name: Import Cobalt Strike and related tools playbook
   import_playbook: cobalt_strike.yml
 
