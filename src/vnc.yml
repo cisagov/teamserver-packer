@@ -13,15 +13,24 @@
     private_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_private_key') }}"
 
 - hosts: all
-  name: Add VNC user to operator group
+  name: Add VNC user to wheel group
   become: yes
   become_method: sudo
   tasks:
-    - name: Add VNC user to operator group
+    - name: Ensure wheel group exists
+      group:
+        name: wheel
+    - name: Give wheel group passwordless sudo access
+      copy:
+        content: |
+          %wheel ALL=(ALL:ALL) NOPASSWD: ALL
+        dest: /etc/sudoers.d/passwordless-sudo-for-wheel
+        mode: 0444
+    - name: Add VNC user to wheel group
       user:
         append: yes
         groups:
-          - operator
+          - wheel
         name: "{{ username }}"
   vars:
     # The username for the VNC user
