@@ -8,7 +8,7 @@
     - python
   tasks:
     - name: Remove python2 installation
-      package:
+      apt:
         name:
           - python
           - python-dev
@@ -18,3 +18,5 @@
           - python-minimal
           - python-pip
         state: absent
+        # This gets rid of any dangling python2 packages
+        autoremove: yes
