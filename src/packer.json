@@ -63,6 +63,10 @@
   ],
   "provisioners": [
     {
+      "playbook_file": "src/upgrade.yml",
+      "type": "ansible"
+    },
+    {
       "playbook_file": "src/python.yml",
       "type": "ansible"
     },

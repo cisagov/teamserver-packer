@@ -6,17 +6,4 @@
   roles:
     - pip
     - python
-  tasks:
-    - name: Remove python2 installation
-      apt:
-        name:
-          - python
-          - python-dev
-          # This is the package that actually provides
-          # /usr/bin/python.  We want /usr/bin/python to not exist,
-          # since if it does then Ansible will use it as its python.
-          - python-minimal
-          - python-pip
-        state: absent
-        # This gets rid of any dangling python2 packages
-        autoremove: yes
+    - remove_python2
