@@ -84,7 +84,8 @@
       ],
       "extra_arguments": [
         "--extra-vars",
-        "{ansible_python_interpreter: auto, build_bucket: {{user `build_bucket`}}}"
+        "{ansible_python_interpreter: auto, build_bucket: {{user `build_bucket`}}}",
+        "-vvv"
       ],
       "playbook_file": "src/playbook.yml",
       "type": "ansible"
