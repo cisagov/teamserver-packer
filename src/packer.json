@@ -63,10 +63,18 @@
   ],
   "provisioners": [
     {
+      "extra_arguments": [
+        "--extra-vars",
+        "ansible_python_interpreter=auto"
+      ],
       "playbook_file": "src/upgrade.yml",
       "type": "ansible"
     },
     {
+      "extra_arguments": [
+        "--extra-vars",
+        "ansible_python_interpreter=auto"
+      ],
       "playbook_file": "src/python.yml",
       "type": "ansible"
     },
@@ -76,7 +84,7 @@
       ],
       "extra_arguments": [
         "--extra-vars",
-        "{build_bucket: {{user `build_bucket`}}}"
+        "{ansible_python_interpreter: auto, build_bucket: {{user `build_bucket`}}}"
       ],
       "playbook_file": "src/playbook.yml",
       "type": "ansible"
