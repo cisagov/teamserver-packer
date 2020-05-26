@@ -9,6 +9,9 @@
       vars:
         bucket_name: "{{ build_bucket }}"
   tasks:
+    - name: Install thunderbird mail client
+      package:
+        name: thunderbird
     - name: Install some tools manually
       block:
         - name: Create a directory for each tool that must be installed manually
