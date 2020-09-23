@@ -31,6 +31,7 @@
             extra_opts:
               - "--strip-components=1"
             group: "{{ group }}"
+            mode: 0644
             remote_src: yes
             src: "{{ item.repo }}"
           loop: "{{ manually_installed_tools }}"
