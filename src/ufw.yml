@@ -31,6 +31,7 @@
         - "5901"
         - "8080"
         - 8000:8999
+        - "50050"
     - name: Allow incoming traffic through default UDP ports
       ufw:
         proto: udp
