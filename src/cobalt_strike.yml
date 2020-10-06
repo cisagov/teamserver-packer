@@ -8,6 +8,7 @@
     - role: cobalt_strike
       vars:
         bucket_name: "{{ build_bucket }}"
+    - server_setup
   tasks:
     - name: Install thunderbird mail client
       package:
