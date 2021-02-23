@@ -11,12 +11,12 @@
     - server_setup
   tasks:
     - name: Install Thunderbird mail client
-      package:
+      ansible.builtin.package:
         name: thunderbird
     - name: Install some tools manually
       block:
         - name: Create a directory for each tool that must be installed manually
-          file:
+          ansible.builtin.file:
             group: "{{ group }}"
             # Allow both root and the desired group to have full
             # permissions in these directories
@@ -27,7 +27,7 @@
           loop_control:
             label: "{{ item.dir_name }}"
         - name: Manually install each tool
-          unarchive:
+          ansible.builtin.unarchive:
             dest: "{{ manually_installed_tools_base_dir }}/{{ item.dir_name }}"
             extra_opts:
               - "--strip-components=1"
@@ -55,6 +55,6 @@
             repo: |
               https://github.com/bluscreenofjeff/Malleable-C2-Randomizer/tarball/master
     - name: Install Mono for the manually installed packages that need it
-      package:
+      ansible.builtin.package:
         name:
           - mono-complete

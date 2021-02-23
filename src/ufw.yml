@@ -16,7 +16,7 @@
   become_method: sudo
   tasks:
     - name: Allow incoming traffic through default TCP ports
-      ufw:
+      community.general.ufw:
         proto: tcp
         rule: allow
         to_port: "{{ item }}"
@@ -33,7 +33,7 @@
         - 8000:8999
         - "50050"
     - name: Allow incoming traffic through default UDP ports
-      ufw:
+      community.general.ufw:
         proto: udp
         rule: allow
         to_port: "{{ item }}"

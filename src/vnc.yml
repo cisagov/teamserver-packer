@@ -18,16 +18,16 @@
   become_method: sudo
   tasks:
     - name: Ensure wheel group exists
-      group:
+      ansible.builtin.group:
         name: wheel
     - name: Give wheel group passwordless sudo access
-      copy:
+      ansible.builtin.copy:
         content: |
           %wheel ALL=(ALL:ALL) NOPASSWD: ALL
         dest: /etc/sudoers.d/passwordless-sudo-for-wheel
         mode: 0444
     - name: Add VNC user to wheel group
-      user:
+      ansible.builtin.user:
         append: yes
         groups:
           - wheel
