@@ -10,4 +10,4 @@
     - htop
     - persist_journald
     - xfce
-    # - xfce_cool
+    - xfce_cool
