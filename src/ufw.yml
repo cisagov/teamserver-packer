@@ -21,22 +21,18 @@
         rule: allow
         to_port: "{{ item }}"
       loop:
-        - "22"
-        - "25"
-        - "53"
-        - "80"
-        - "443"
-        - "587"
-        - "993"
-        - "5901"
-        - "8080"
-        - 8000:8999
-        - "50050"
+        - "25"       # Mail
+        - "53"       # C2 traffic
+        - "443"      # Payload hosting
+        - "587"      # Mail
+        - "993"      # Mail
+        - "8080"     # C2 listening and testing
+        - 8000:8999  # Additional listeners, if necessary
     - name: Allow incoming traffic through default UDP ports
       community.general.ufw:
         proto: udp
         rule: allow
         to_port: "{{ item }}"
       loop:
-        - "53"
-        - "8080"
+        - "53"    # C2 traffic
+        - "8080"  # C2 listening and testing
