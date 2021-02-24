@@ -10,9 +10,11 @@
         bucket_name: "{{ build_bucket }}"
     - server_setup
   tasks:
-    - name: Install Thunderbird mail client
+    - name: Install Thunderbird mail client and dnsutils
       ansible.builtin.package:
-        name: thunderbird
+        name:
+          - dnsutils
+          - thunderbird
     - name: Install some tools manually
       block:
         - name: Create a directory for each tool that must be installed manually
