@@ -21,18 +21,21 @@
         rule: allow
         to_port: "{{ item }}"
       loop:
-        - "25"       # Mail
-        - "53"       # C2 traffic
-        - "443"      # Payload hosting
-        - "587"      # Mail
-        - "993"      # Mail
-        - "8080"     # C2 listening and testing
-        - 8000:8999  # Additional listeners, if necessary
+        - "22"       # ssh for Guacamole server (internal to assessment env)
+        - "25"       # Mail (external)
+        - "53"       # C2 traffic (external)
+        - "443"      # Payload hosting (external)
+        - "587"      # Mail (external)
+        - "993"      # IMAP (internal to assessment env)
+        - "5901"     # vnc for Guacamole (internal to assessment env)
+        - "8080"     # C2 listening and testing (external)
+        - 8000:8999  # Additional listeners, if necessary (external)
+        - "50050"    # CobaltStrike (internal to assessment env)
     - name: Allow incoming traffic through default UDP ports
       community.general.ufw:
         proto: udp
         rule: allow
         to_port: "{{ item }}"
       loop:
-        - "53"    # C2 traffic
-        - "8080"  # C2 listening and testing
+        - "53"    # C2 traffic (external)
+        - "8080"  # C2 listening and testing (external)
