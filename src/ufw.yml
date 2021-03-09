@@ -16,27 +16,26 @@
   become_method: sudo
   tasks:
     - name: Allow incoming traffic through default TCP ports
-      ufw:
+      community.general.ufw:
         proto: tcp
         rule: allow
         to_port: "{{ item }}"
       loop:
-        - "22"
-        - "25"
-        - "53"
-        - "80"
-        - "443"
-        - "587"
-        - "993"
-        - "5901"
-        - "8080"
-        - 8000:8999
-        - "50050"
+        - "22"       # ssh for Guacamole server (internal to assessment env)
+        - "25"       # Mail (external)
+        - "53"       # C2 traffic (external)
+        - "443"      # Payload hosting (external)
+        - "587"      # Mail (external)
+        - "993"      # IMAP (internal to assessment env)
+        - "5901"     # vnc for Guacamole (internal to assessment env)
+        - "8080"     # C2 listening and testing (external)
+        - 8000:8999  # Additional listeners, if necessary (external)
+        - "50050"    # CobaltStrike (internal to assessment env)
     - name: Allow incoming traffic through default UDP ports
-      ufw:
+      community.general.ufw:
         proto: udp
         rule: allow
         to_port: "{{ item }}"
       loop:
-        - "53"
-        - "8080"
+        - "53"    # C2 traffic (external)
+        - "8080"  # C2 listening and testing (external)

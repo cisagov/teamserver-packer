@@ -3,6 +3,8 @@
   name: amazon_efs_utils
 - src: https://github.com/cisagov/ansible-role-amazon-ssm-agent
   name: amazon_ssm_agent
+- src: https://github.com/cisagov/ansible-role-assessment-tool
+  name: assessment_tool
 - src: https://github.com/cisagov/ansible-role-banner
   name: banner
 - src: https://github.com/cisagov/ansible-role-chrony-aws
@@ -37,7 +39,5 @@
   name: upgrade
 - src: https://github.com/cisagov/ansible-role-vnc-server
   name: vnc
-- src: https://github.com/cisagov/ansible-role-xfce
-  name: xfce
 - src: https://github.com/cisagov/ansible-role-xfce-cool
   name: xfce_cool
