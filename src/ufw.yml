@@ -24,6 +24,7 @@
         - "22"       # ssh for Guacamole server (internal to assessment env)
         - "25"       # Mail (external)
         - "53"       # C2 traffic (external)
+        - "80"       # Domain verification (external)
         - "443"      # Payload hosting (external)
         - "587"      # Mail (external)
         - "993"      # IMAP (internal to assessment env)
