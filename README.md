@@ -26,20 +26,6 @@ remote profile data in order to use
 
 To create the build user, follow these instructions:
 
-Before the build user can be created, the following profile must exist in
-your AWS credentials file:
-
-* `cool-terraform-backend`
-
-The easiest way to set up that profile is to use our
-[`aws-profile-sync`](https://github.com/cisagov/aws-profile-sync) utility.
-Follow the usage instructions in that repository before continuing with the
-next steps.  Note that you will need to know where your team stores their
-remote profile data in order to use
-[`aws-profile-sync`](https://github.com/cisagov/aws-profile-sync).
-
-To create the build user, follow these instructions:
-
 ```console
 cd terraform-build-user
 terraform init --upgrade=true
