@@ -1,37 +1,31 @@
 ---
 - hosts: all
-  name: Install VNC
+  name: Install VNC and configure vnc user
   become: yes
   become_method: sudo
   roles:
     - vnc
+  tasks:
+    - name: Add VNC user to wheel group
+      block:
+        - name: Ensure wheel group exists
+          ansible.builtin.group:
+            name: wheel
+        - name: Give wheel group passwordless sudo access
+          ansible.builtin.copy:
+            content: |
+              %wheel ALL=(ALL:ALL) NOPASSWD: ALL
+            dest: /etc/sudoers.d/passwordless-sudo-for-wheel
+            mode: 0444
+        - name: Add VNC user to wheel group
+          ansible.builtin.user:
+            append: yes
+            groups:
+              - wheel
+            name: "{{ username }}"
   vars:
     # The username, password, and ssh keys for the VNC user
     username: "{{ lookup('aws_ssm', '/vnc/username') }}"
     password: "{{ lookup('aws_ssm', '/vnc/password') }}"
     public_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_public_key') }}"
     private_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_private_key') }}"
-
-- hosts: all
-  name: Add VNC user to wheel group
-  become: yes
-  become_method: sudo
-  tasks:
-    - name: Ensure wheel group exists
-      ansible.builtin.group:
-        name: wheel
-    - name: Give wheel group passwordless sudo access
-      ansible.builtin.copy:
-        content: |
-          %wheel ALL=(ALL:ALL) NOPASSWD: ALL
-        dest: /etc/sudoers.d/passwordless-sudo-for-wheel
-        mode: 0444
-    - name: Add VNC user to wheel group
-      ansible.builtin.user:
-        append: yes
-        groups:
-          - wheel
-        name: "{{ username }}"
-  vars:
-    # The username for the VNC user
-    username: "{{ lookup('aws_ssm', '/vnc/username') }}"
