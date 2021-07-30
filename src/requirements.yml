@@ -43,3 +43,4 @@
   name: vnc
 - src: https://github.com/cisagov/ansible-role-xfce-cool
   name: xfce_cool
+  version: bugfix/create-efs-symlink-via-systemd
