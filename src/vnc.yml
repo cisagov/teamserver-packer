@@ -69,6 +69,16 @@
               - disable-linger
               - "{{ username }}"
             removes: /var/lib/systemd/linger/{{ username }}
+        - name: >-
+            Add an environment variable necessary to make systemctl
+            --user commands work
+          ansible.builtin.lineinfile:
+            create: yes
+            group: "{{ username }}"
+            line: export XDG_RUNTIME_DIR=/run/user/$(id --user)
+            mode: 0644
+            owner: "{{ username }}"
+            path: /home/{{ username }}/.bashrc
   vars:
     # The username, password, and ssh keys for the VNC user
     username: "{{ lookup('aws_ssm', '/vnc/username') }}"
