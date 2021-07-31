@@ -79,6 +79,20 @@
             mode: 0644
             owner: "{{ username }}"
             path: /home/{{ username }}/.bashrc
+    # These environment variables were asked for in
+    # cisagov/cool-system#212
+    - name: Add PCA-specific environment variables
+      ansible.builtin.lineinfile:
+        create: yes
+        group: "{{ username }}"
+        line: "{{ item }}"
+        mode: 0644
+        owner: "{{ username }}"
+        path: /home/{{ username }}/.bashrc
+      loop:
+        - EFS_SHARE=/share
+        - PCA_OPS_PATH=${EFS_SHARE}/PCA
+        - PCA_DEV_PATH=${EFS_SHARE}/private
   vars:
     # The username, password, and ssh keys for the VNC user
     username: "{{ lookup('aws_ssm', '/vnc/username') }}"
