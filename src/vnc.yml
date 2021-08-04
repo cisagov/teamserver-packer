@@ -1,37 +1,101 @@
 ---
 - hosts: all
-  name: Install VNC
+  name: Install VNC and configure VNC user
   become: yes
   become_method: sudo
   roles:
     - vnc
+  tasks:
+    - name: Add VNC user to wheel group
+      block:
+        - name: Ensure wheel group exists
+          ansible.builtin.group:
+            name: wheel
+        - name: Give wheel group passwordless sudo access
+          ansible.builtin.copy:
+            content: |
+              %wheel ALL=(ALL:ALL) NOPASSWD: ALL
+            dest: /etc/sudoers.d/passwordless-sudo-for-wheel
+            mode: 0444
+        - name: Add VNC user to wheel group
+          ansible.builtin.user:
+            append: yes
+            groups:
+              - wheel
+            name: "{{ username }}"
+    - name: >-
+        Enable and start the user-mode systemd service that creates
+        the file share symlink for the VNC user
+      block:
+        - name: Start and enable systemd-logind
+          service:
+            enabled: yes
+            name: systemd-logind
+            state: started
+        # This causes the VNC user's user-specific systemd session to
+        # start on boot instead of only when that user logs in.  We
+        # need the VNC user's session to be active so we can enable
+        # the user-mode systemd service, so we use the trick of
+        # enabling linger for the user, enabling the user-mode
+        # service, then disabling linger for the user.
+        - name: Enable linger for VNC user
+          ansible.builtin.command:
+            argv:
+              - /bin/loginctl
+              - enable-linger
+              - "{{ username }}"
+            creates: /var/lib/systemd/linger/{{ username }}
+        - name: >-
+            Enable the user-mode systemd service that creates the file
+            share symlink for the VNC user
+          ansible.builtin.systemd:
+            daemon_reload: yes
+            enabled: yes
+            name: create-fileshare-symlink
+            scope: user
+          become_user: "{{ username }}"
+          vars:
+            # This is necessary to get around the difficult case where
+            # you ssh into a machine as an unprivileged user _and_
+            # become an unprivileged user:
+            # https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
+            ansible_ssh_pipelining: yes
+        # Now that the user-mode service has been enabled we can
+        # disable linger for the VNC user.
+        - name: Disable linger for VNC user
+          ansible.builtin.command:
+            argv:
+              - /bin/loginctl
+              - disable-linger
+              - "{{ username }}"
+            removes: /var/lib/systemd/linger/{{ username }}
+        - name: >-
+            Add an environment variable necessary to make systemctl
+            --user commands work
+          ansible.builtin.lineinfile:
+            create: yes
+            group: "{{ username }}"
+            line: export XDG_RUNTIME_DIR=/run/user/$(id --user)
+            mode: 0644
+            owner: "{{ username }}"
+            path: /home/{{ username }}/.bashrc
+    # These environment variables were asked for in
+    # cisagov/cool-system#212
+    - name: Add PCA-specific environment variables
+      ansible.builtin.lineinfile:
+        create: yes
+        group: "{{ username }}"
+        line: "{{ item }}"
+        mode: 0644
+        owner: "{{ username }}"
+        path: /home/{{ username }}/.bashrc
+      loop:
+        - export EFS_SHARE=/share
+        - export PCA_OPS_PATH=${EFS_SHARE}/PCA
+        - export PCA_DEV_PATH=${EFS_SHARE}/private
   vars:
     # The username, password, and ssh keys for the VNC user
     username: "{{ lookup('aws_ssm', '/vnc/username') }}"
     password: "{{ lookup('aws_ssm', '/vnc/password') }}"
     public_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_public_key') }}"
     private_ssh_key: "{{ lookup('aws_ssm', '/vnc/ssh/rsa_private_key') }}"
-
-- hosts: all
-  name: Add VNC user to wheel group
-  become: yes
-  become_method: sudo
-  tasks:
-    - name: Ensure wheel group exists
-      ansible.builtin.group:
-        name: wheel
-    - name: Give wheel group passwordless sudo access
-      ansible.builtin.copy:
-        content: |
-          %wheel ALL=(ALL:ALL) NOPASSWD: ALL
-        dest: /etc/sudoers.d/passwordless-sudo-for-wheel
-        mode: 0444
-    - name: Add VNC user to wheel group
-      ansible.builtin.user:
-        append: yes
-        groups:
-          - wheel
-        name: "{{ username }}"
-  vars:
-    # The username for the VNC user
-    username: "{{ lookup('aws_ssm', '/vnc/username') }}"
