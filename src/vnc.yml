@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  name: Install VNC and configure vnc user
+  name: Install VNC and configure VNC user
   become: yes
   become_method: sudo
   roles:
@@ -25,20 +25,20 @@
             name: "{{ username }}"
     - name: >-
         Enable and start the user-mode systemd service that creates
-        the file share symlink for the vnc user
+        the file share symlink for the VNC user
       block:
         - name: Start and enable systemd-logind
           service:
             enabled: yes
             name: systemd-logind
             state: started
-        # This causes the vnc user's user-specific systemd session to
+        # This causes the VNC user's user-specific systemd session to
         # start on boot instead of only when that user logs in.  We
-        # need the vnc user's session to be active so we can enable
+        # need the VNC user's session to be active so we can enable
         # the user-mode systemd service, so we use the trick of
         # enabling linger for the user, enabling the user-mode
         # service, then disabling linger for the user.
-        - name: Enable linger for vnc user
+        - name: Enable linger for VNC user
           ansible.builtin.command:
             argv:
               - /bin/loginctl
@@ -47,7 +47,7 @@
             creates: /var/lib/systemd/linger/{{ username }}
         - name: >-
             Enable the user-mode systemd service that creates the file
-            share symlink for the vnc user
+            share symlink for the VNC user
           ansible.builtin.systemd:
             daemon_reload: yes
             enabled: yes
@@ -61,8 +61,8 @@
             # https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
             ansible_ssh_pipelining: yes
         # Now that the user-mode service has been enabled we can
-        # disable linger for the vnc user.
-        - name: Disable linger for vnc user
+        # disable linger for the VNC user.
+        - name: Disable linger for VNC user
           ansible.builtin.command:
             argv:
               - /bin/loginctl
