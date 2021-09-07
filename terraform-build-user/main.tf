@@ -17,7 +17,7 @@ module "iam_user" {
     "/vnc/ssh/rsa_public_key",
     "/vnc/ssh/rsa_private_key",
   ]
-  user_name = "test-teamserver-packer"
+  user_name = "build-teamserver-packer"
 }
 
 # Attach 3rd party S3 bucket read-only policy from
