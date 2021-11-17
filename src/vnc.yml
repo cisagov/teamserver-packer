@@ -108,5 +108,5 @@
         - export PCA_OPS_PATH=${EFS_SHARE}/PCA
         - export PCA_DEV_PATH=${EFS_SHARE}/private
   vars:
-    # The username, password, and ssh keys for the VNC user
+    # The username for the VNC user
     username: "{{ lookup('aws_ssm', '/vnc/username') }}"
