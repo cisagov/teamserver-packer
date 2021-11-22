@@ -52,3 +52,7 @@
       vars:
         # Group ownership for the Cobalt Strike addons
         group: wheel
+    - name: Install libreoffice
+      ansible.builtin.package:
+        name:
+          - libreoffice
