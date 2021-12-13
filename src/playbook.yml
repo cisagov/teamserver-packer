@@ -11,6 +11,9 @@
 - name: Import Cobalt Strike and related tools playbook
   ansible.builtin.import_playbook: cobalt_strike.yml
 
+- name: Import Cobalt Strike add-ons playbook
+  ansible.builtin.import_playbook: cobalt_strike_addons.yml
+
 - name: Import additional software playbook
   ansible.builtin.import_playbook: additional_software.yml
 

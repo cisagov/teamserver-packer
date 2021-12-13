@@ -1,0 +1,46 @@
+---
+- hosts: all
+  name: Install Cobalt Strike add-ons
+  become: yes
+  become_method: sudo
+  vars:
+    # Group ownership for the Cobalt Strike addons
+    group: wheel
+  roles:
+    - role: assessment_tool
+      vars:
+        archive_src: "https://github.com/FortyNorthSecurity/C2concealer/\
+        tarball/master"
+        install_dir: /tools/C2concealer
+        pip_packages:
+          - .
+        unarchive_extra_opts:
+          - --strip-components=1
+    - role: assessment_tool
+      vars:
+        archive_src: "https://github.com/killswitch-GUI/\
+        CobaltStrike-Toolkit/tarball/master"
+        install_dir: /tools/CobaltStrike-Toolkit
+        powershell: yes
+        unarchive_extra_opts:
+          - --strip-components=1
+    - role: assessment_tool
+      vars:
+        archive_src: "https://github.com/rsmudge/ElevateKit/tarball/master"
+        install_dir: /tools/ElevateKit
+        unarchive_extra_opts:
+          - --strip-components=1
+    - role: assessment_tool
+      vars:
+        archive_src: "https://github.com/rsmudge/Malleable-C2-Profiles/\
+        tarball/master"
+        install_dir: /tools/Malleable-C2-Profiles
+        unarchive_extra_opts:
+          - --strip-components=1
+    - role: assessment_tool
+      vars:
+        archive_src: "https://github.com/bluscreenofjeff/\
+        Malleable-C2-Randomizer/tarball/master"
+        install_dir: /tools/Malleable-C2-Randomizer
+        unarchive_extra_opts:
+          - --strip-components=1
