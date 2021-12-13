@@ -11,6 +11,9 @@
 - name: Import Cobalt Strike and related tools playbook
   ansible.builtin.import_playbook: cobalt_strike.yml
 
+- name: Import additional software playbook
+  ansible.builtin.import_playbook: additional_software.yml
+
 # The AWS playbook must run before this one, since this playbook uses
 # a user group created in the AWS playbook.
 - name: Import VNC playbook

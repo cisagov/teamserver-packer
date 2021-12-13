@@ -1,0 +1,14 @@
+---
+- hosts: all
+  name: Install additional software
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Install LibreOffice
+      ansible.builtin.package:
+        name:
+          - libreoffice
+    - name: Install Mono
+      ansible.builtin.package:
+        name:
+          - mono-complete
