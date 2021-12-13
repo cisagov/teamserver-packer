@@ -60,6 +60,14 @@
               - .
             unarchive_extra_opts:
               - --strip-components=1
+        - name: Install ElevateKit
+          ansible.builtin.import_role:
+            name: assessment_tool
+          vars:
+            archive_src: "https://github.com/rsmudge/ElevateKit/tarball/master"
+            install_dir: /tools/ElevateKit
+            unarchive_extra_opts:
+              - --strip-components=1
       vars:
         # Group ownership for the Cobalt Strike addons
         group: wheel
