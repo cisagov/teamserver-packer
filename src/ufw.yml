@@ -14,7 +14,7 @@
   become: yes
   become_method: sudo
   tasks:
-    - name: Allow incoming traffic through default TCP ports
+    - name: Allow incoming traffic through specified TCP ports
       community.general.ufw:
         proto: tcp
         rule: allow
