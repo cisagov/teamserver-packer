@@ -36,10 +36,10 @@
         rule: deny
         to_port: "{{ item }}"
       loop:
-        - "53"       # C2 traffic (external)
-        - "80"       # Domain verification (external)
-        - "443"      # Payload hosting (external)
-        - "8080"     # C2 listening and testing (external)
+        - "53"       # DNS
+        - "80"       # Domain verification
+        - "443"      # Payload hosting
+        - "8080"     # C2 listening
     - name: Deny incoming traffic to specified UDP ports
       # These rules may be manually modified by assessors as needed, but we
       # want to default to a minimal set of allowed ports.
