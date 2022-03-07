@@ -101,7 +101,7 @@ source "amazon-ebs" "teamserver" {
     }
   }
   tags = {
-    Application        = "COOL"
+    Application        = "Teamserver"
     Base_AMI_Name      = data.amazon-ami.debian_bullseye.name
     GitHub_Release_URL = var.release_url
     OS_Version         = "Debian Bullseye"
