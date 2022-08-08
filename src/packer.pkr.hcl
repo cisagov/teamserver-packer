@@ -131,7 +131,7 @@ build {
   }
 
   provisioner "ansible" {
-    ansible_env_vars = ["AWS_DEFAULT_REGION=${var.build_region}"]
+    ansible_env_vars = ["ANSIBLE_PRIVATE_ROLE_VARS=True", "AWS_DEFAULT_REGION=${var.build_region}"]
     extra_arguments  = ["--extra-vars", "{build_bucket: ${var.build_bucket}}"]
     playbook_file    = "src/playbook.yml"
   }
