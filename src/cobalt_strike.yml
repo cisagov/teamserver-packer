@@ -21,6 +21,19 @@
           - python3-boto3
     - name: Install some Cobalt Strike addons
       block:
+        # This tool requires a JRE, but we have already installed one
+        # above
+        - name: Install C2concealer
+          ansible.builtin.import_role:
+            name: assessment_tool
+          vars:
+            archive_src: "https://github.com/FortyNorthSecurity/C2concealer/\
+            tarball/master"
+            install_dir: /tools/C2concealer
+            pip_packages:
+              - .
+            unarchive_extra_opts:
+              - --strip-components=1
         - name: Install CobaltStrike-Toolkit
           ansible.builtin.import_role:
             name: assessment_tool
@@ -47,6 +60,15 @@
             archive_src: "https://github.com/bluscreenofjeff/\
             Malleable-C2-Randomizer/tarball/master"
             install_dir: /tools/Malleable-C2-Randomizer
+            unarchive_extra_opts:
+              - --strip-components=1
+        - name: Install SourcePoint
+          ansible.builtin.import_role:
+            name: assessment_tool
+          vars:
+            archive_src: https://github.com/Tylous/SourcePoint/tarball/main
+            go: yes
+            install_dir: /tools/SourcePoint
             unarchive_extra_opts:
               - --strip-components=1
       vars:
