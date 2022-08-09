@@ -5,6 +5,7 @@
   name: amazon_ssm_agent
 - src: https://github.com/cisagov/ansible-role-assessment-tool
   name: assessment_tool
+  version: improvement/allow-extra-args-to-pip
 - src: https://github.com/cisagov/ansible-role-banner
   name: banner
 - src: https://github.com/cisagov/ansible-role-chrony-aws
