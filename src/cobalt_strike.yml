@@ -30,7 +30,7 @@
             archive_src: "https://github.com/FortyNorthSecurity/C2concealer/\
             tarball/master"
             install_dir: /tools/C2concealer
-            pip_extra_args: "-e"
+            pip_extra_args: "--editable"
             pip_packages:
               - .
             unarchive_extra_opts:
