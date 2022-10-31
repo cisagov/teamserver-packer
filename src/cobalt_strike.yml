@@ -10,12 +10,15 @@
         bucket_name: "{{ build_bucket }}"
     - server_setup
   tasks:
-    - name: Install Thunderbird mail client and dnsutils
+    - name: Install dnsutils
       ansible.builtin.package:
         name:
           - dnsutils
-          - thunderbird
-    - name: Install python3-boto3 for Teamserver cloud-init scripts
+    # install-certificates.py provides the certificate that is in turn
+    # used by add-https-certificate-block-to-cs-profiles.sh
+    - name: >
+        Install python3-boto3 for Teamserver cloud-init script
+        install-certificates.py
       ansible.builtin.package:
         name:
           - python3-boto3
@@ -75,7 +78,3 @@
       vars:
         # Group ownership for the Cobalt Strike addons
         group: wheel
-    - name: Install LibreOffice
-      ansible.builtin.package:
-        name:
-          - libreoffice
