@@ -77,4 +77,7 @@
               - --strip-components=1
       vars:
         # Group ownership for the Cobalt Strike addons
+        #
+        # Note that this means that the vnc.yml playbook _must_ run
+        # before this one, so that the wheel group has been created.
         group: wheel

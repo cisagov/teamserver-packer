@@ -8,9 +8,6 @@
 - name: Import cloud-init playbook
   ansible.builtin.import_playbook: cloud_init.yml
 
-- name: Import Cobalt Strike and related tools playbook
-  ansible.builtin.import_playbook: cobalt_strike.yml
-
 - name: Import UFW playbook
   ansible.builtin.import_playbook: ufw.yml
 
@@ -18,6 +15,11 @@
 # a user group created in the AWS playbook.
 - name: Import VNC playbook
   ansible.builtin.import_playbook: vnc.yml
+
+# The VNC playbook must run before this one, since this playbook uses
+# a user group (wheel) created in the VNC playbook.
+- name: Import Cobalt Strike and related tools playbook
+  ansible.builtin.import_playbook: cobalt_strike.yml
 
 # The VNC playbook must run before this one, since this playbook uses
 # a user created in the VNC playbook.
