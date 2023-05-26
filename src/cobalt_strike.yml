@@ -3,13 +3,18 @@
   name: Install Cobalt Strike
   become: yes
   become_method: sudo
-  roles:
-    - openjdk
-    - role: cobalt_strike
+  tasks:
+    - name: Install OpenJDK
+      ansible.builtin.include_role:
+        name: openjdk
+    - name: Install Cobalt Strike
+      ansible.builtin.include_role:
+        name: cobalt_strike
       vars:
         bucket_name: "{{ build_bucket }}"
-    - server_setup
-  tasks:
+    - name: Install ServerSetup script
+      ansible.builtin.include_role:
+        name: server_setup
     - name: Install dnsutils
       ansible.builtin.package:
         name:

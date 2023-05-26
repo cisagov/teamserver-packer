@@ -3,8 +3,10 @@
   name: Install VNC and configure VNC user
   become: yes
   become_method: sudo
-  roles:
-    - role: vnc
+  tasks:
+    - name: Install VNC
+      ansible.builtin.include_role:
+        name: vnc
       vars:
         # The user information and ssh keys for the VNC user
         password: "{{ lookup('aws_ssm', '/vnc/password') }}"
@@ -19,7 +21,6 @@
         # users on all instances.  This helps us avoid UID/GID
         # collisions with files written to the EFS share.
         user_uid: 2048
-  tasks:
     - name: Add VNC user to wheel group
       block:
         - name: Ensure wheel group exists
