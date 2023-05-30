@@ -3,13 +3,18 @@
   name: Install Cobalt Strike
   become: yes
   become_method: sudo
-  roles:
-    - openjdk
-    - role: cobalt_strike
+  tasks:
+    - name: Install OpenJDK
+      ansible.builtin.include_role:
+        name: openjdk
+    - name: Install Cobalt Strike
+      ansible.builtin.include_role:
+        name: cobalt_strike
       vars:
         bucket_name: "{{ build_bucket }}"
-    - server_setup
-  tasks:
+    - name: Install ServerSetup script
+      ansible.builtin.include_role:
+        name: server_setup
     - name: Install dnsutils
       ansible.builtin.package:
         name:
@@ -27,7 +32,7 @@
         # This tool requires a JRE, but we have already installed one
         # above
         - name: Install C2concealer
-          ansible.builtin.import_role:
+          ansible.builtin.include_role:
             name: assessment_tool
           vars:
             archive_src: "https://github.com/FortyNorthSecurity/C2concealer/\
@@ -39,7 +44,7 @@
             unarchive_extra_opts:
               - --strip-components=1
         - name: Install CobaltStrike-Toolkit
-          ansible.builtin.import_role:
+          ansible.builtin.include_role:
             name: assessment_tool
           vars:
             archive_src: "https://github.com/killswitch-GUI/\
@@ -49,7 +54,7 @@
             unarchive_extra_opts:
               - --strip-components=1
         - name: Install Malleable-C2-Profiles
-          ansible.builtin.import_role:
+          ansible.builtin.include_role:
             name: assessment_tool
           vars:
             archive_src: "https://github.com/rsmudge/Malleable-C2-Profiles/\
@@ -58,7 +63,7 @@
             unarchive_extra_opts:
               - --strip-components=1
         - name: Install Malleable-C2-Randomizer
-          ansible.builtin.import_role:
+          ansible.builtin.include_role:
             name: assessment_tool
           vars:
             archive_src: "https://github.com/bluscreenofjeff/\
@@ -67,7 +72,7 @@
             unarchive_extra_opts:
               - --strip-components=1
         - name: Install SourcePoint
-          ansible.builtin.import_role:
+          ansible.builtin.include_role:
             name: assessment_tool
           vars:
             archive_src: https://github.com/Tylous/SourcePoint/tarball/main
