@@ -1,7 +1,7 @@
 ---
 - hosts: all
   name: Install VNC and configure VNC user
-  become: yes
+  become: true
   become_method: ansible.builtin.sudo
   tasks:
     - name: Install VNC
@@ -36,7 +36,7 @@
             mode: 0444
         - name: Add VNC user to wheel group
           ansible.builtin.user:
-            append: yes
+            append: true
             groups:
               - wheel
             name: "{{ vnc_server_username }}"
@@ -44,7 +44,7 @@
     # cisagov/cool-system#212
     - name: Add PCA-specific environment variables
       ansible.builtin.lineinfile:
-        create: yes
+        create: true
         group: "{{ vnc_server_username }}"
         line: "{{ item }}"
         mode: 0644
