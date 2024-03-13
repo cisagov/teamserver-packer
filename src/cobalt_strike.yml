@@ -1,6 +1,6 @@
 ---
-- hosts: all
-  name: Install Cobalt Strike
+- name: Install Cobalt Strike
+  hosts: all
   become: true
   become_method: ansible.builtin.sudo
   tasks:
