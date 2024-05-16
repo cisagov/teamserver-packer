@@ -19,3 +19,15 @@
     - name: Configure JournalD to preserve logs across reboots
       ansible.builtin.include_role:
         name: persist_journald
+    - name: Install and configure systemd-resolved
+      ansible.builtin.include_role:
+        name: systemd_resolved
+      vars:
+        # Symlink /etc/resolv.conf to a systemd-resolved-provided file
+        # that points to the DNS servers provided via DHCP instead of
+        # the DNS stub resolver.
+        systemd_resolved_resolv_conf_filename: >-
+          {{ dynamic_resolv_conf_target_dir }}/resolv.conf
+        # Disable the DNS stub listener, since users may want to use
+        # port 53 for their own DNS listener.
+        systemd_resolved_dns_stub_listener: false
