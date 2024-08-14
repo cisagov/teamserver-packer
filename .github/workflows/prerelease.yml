@@ -37,7 +37,8 @@ jobs:
       fail-fast: false
       matrix:
         architecture:
-          - arm64
+          # Cobalt Strike does not currently support ARM64.
+          # - arm64
           - x86_64
     steps:
       - id: harden-runner
