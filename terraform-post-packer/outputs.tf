@@ -1,3 +1,4 @@
+# Cobalt Strike does not currently support ARM64.
 # output "launch_permissions_arm64" {
 #   value       = module.ami_launch_permission_arm64
 #   description = "The cisagov/ami-launch-permission-tf-module for each ARM64 AMI to which launch permission is being granted."
