@@ -2,7 +2,7 @@
 
 [![GitHub Build Status](https://github.com/cisagov/teamserver-packer/workflows/build/badge.svg)](https://github.com/cisagov/teamserver-packer/actions)
 
-This project can be used to build a Debian Buster AMI with [Cobalt
+This project can be used to build a Debian Bookworm AMI with [Cobalt
 Strike](https://www.cobaltstrike.com/) installed.
 
 ## Pre-requisites ##
