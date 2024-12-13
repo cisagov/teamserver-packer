@@ -178,6 +178,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | ami\_regions | The list of AWS regions to copy the AMI to once it has been created. Example: ["us-east-1"] | `list(string)` | `[]` | no |
+| build\_bucket | The S3 bucket containing the Cobalt Strike installer. | `string` | `""` | no |
 | build\_region | The region in which to retrieve the base AMI from and build the new AMI. | `string` | `"us-east-1"` | no |
 | build\_region\_kms | The ID or ARN of the KMS key to use for AMI encryption. | `string` | `"alias/cool-amis"` | no |
 | is\_prerelease | The pre-release status to use for the tags applied to the created AMI. | `bool` | `false` | no |
