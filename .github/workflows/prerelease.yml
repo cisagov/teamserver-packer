@@ -51,14 +51,10 @@ jobs:
           # - arm64
           - x86_64
     steps:
-      # If we use this proxy then the calls to the AWS API to pull
-      # Cobalt Strike files from an S3 bucket fail.  For example, this
-      # Ansible task fails:
-      # https://github.com/cisagov/ansible-role-cobalt-strike/blob/53d5225faf8277f744b0fc356ccc102048d603db/tasks/main.yml#L11-L18
-      # - uses: GitHubSecurityLab/actions-permissions/monitor@v1
-      #   with:
-      #     # Uses the organization variable unless overridden
-      #     config: ${{ vars.ACTIONS_PERMISSIONS_CONFIG }}
+      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
+        with:
+          # Uses the organization variable unless overridden
+          config: ${{ vars.ACTIONS_PERMISSIONS_CONFIG }}
       - id: harden-runner
         name: Harden the runner
         uses: step-security/harden-runner@v2
