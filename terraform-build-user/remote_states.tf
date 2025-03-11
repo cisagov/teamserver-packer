@@ -45,6 +45,8 @@ data "terraform_remote_state" "ansible_role_cobalt_strike" {
     region         = "us-east-1"
     key            = "ansible-role-cobalt-strike/terraform.tfstate"
   }
+
+  workspace = terraform.workspace
 }
 
 data "terraform_remote_state" "users" {
