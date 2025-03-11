@@ -17,20 +17,10 @@ module "iam_user" {
 }
 
 # Attach 3rd party S3 bucket read-only policy from
-# cisagov/ansible-role-cobalt-strike to the production EC2AMICreate
-# role
-resource "aws_iam_role_policy_attachment" "thirdpartybucketread_production" {
-  provider = aws.images-production-ami
+# cisagov/ansible-role-cobalt-strike to the EC2AMICreate role
+resource "aws_iam_role_policy_attachment" "thirdpartybucketread" {
+  provider = aws.images-ami
 
-  policy_arn = data.terraform_remote_state.ansible_role_cobalt_strike.outputs.production_policy.arn
-  role       = module.iam_user.ec2amicreate_role_production.name
-}
-
-# Attach 3rd party S3 bucket read-only policy from
-# cisagov/ansible-role-cobalt-strike to the staging EC2AMICreate role
-resource "aws_iam_role_policy_attachment" "thirdpartybucketread_staging" {
-  provider = aws.images-staging-ami
-
-  policy_arn = data.terraform_remote_state.ansible_role_cobalt_strike.outputs.staging_policy.arn
-  role       = module.iam_user.ec2amicreate_role_staging.name
+  policy_arn = data.terraform_remote_state.ansible_role_cobalt_strike.outputs.policy.arn
+  role       = module.iam_user.ec2amicreate_role.name
 }
