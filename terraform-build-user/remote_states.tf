@@ -38,12 +38,12 @@ data "terraform_remote_state" "ansible_role_cobalt_strike" {
   backend = "s3"
 
   config = {
-    encrypt        = true
-    bucket         = "cisa-cool-terraform-state"
+    bucket         = var.terraform_state_bucket
     dynamodb_table = "terraform-state-lock"
+    encrypt        = true
+    key            = "ansible-role-cobalt-strike/terraform.tfstate"
     profile        = "cool-terraform-backend"
     region         = "us-east-1"
-    key            = "ansible-role-cobalt-strike/terraform.tfstate"
   }
 
   workspace = terraform.workspace
