@@ -21,6 +21,6 @@ module "iam_user" {
 resource "aws_iam_role_policy_attachment" "thirdpartybucketread" {
   provider = aws.images-ami
 
-  policy_arn = data.terraform_remote_state.ansible_role_cobalt_strike.outputs.policy.arn
+  policy_arn = data.terraform_remote_state.ansible_role_cobalt_strike.outputs.bucket_access_policy.arn
   role       = module.iam_user.ec2amicreate_role.name
 }
