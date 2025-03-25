@@ -8,6 +8,7 @@ module "iam_user" {
   }
 
   ssm_parameters = [
+    "/third_party_bucket_name",
     "/vnc/username",
     "/vnc/password",
     "/vnc/ssh/ed25519_public_key",
