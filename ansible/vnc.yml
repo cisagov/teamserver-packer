@@ -33,7 +33,7 @@
             content: |
               %wheel ALL=(ALL:ALL) NOPASSWD: ALL
             dest: /etc/sudoers.d/passwordless-sudo-for-wheel
-            mode: 0444
+            mode: u=r,g=r,o=r
         - name: Add VNC user to wheel group
           ansible.builtin.user:
             append: true
@@ -47,7 +47,7 @@
         create: true
         group: "{{ vnc_server_username }}"
         line: "{{ item }}"
-        mode: 0644
+        mode: u=rw,g=r,o=r
         owner: "{{ vnc_server_username }}"
         path: /home/{{ vnc_server_username }}/.bashrc
       loop:
