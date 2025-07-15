@@ -77,7 +77,7 @@
           ansible.builtin.include_role:
             name: assessment_tool
           vars:
-            assessment_tool_archive_src: https://github.com/Tylous/SourcePoint/tarball/main
+            assessment_tool_archive_src: https://github.com/Tylous/SourcePoint/tarball/1d02fe6bdbfe2a3d399577b6a5bb2937df25663e
             assessment_tool_go: true
             assessment_tool_install_dir: /tools/SourcePoint
             assessment_tool_unarchive_extra_opts:
