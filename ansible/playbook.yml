@@ -12,9 +12,6 @@
     configuration fix
   ansible.builtin.import_playbook: install-prerequisites-for-netplan-configuration-fix.yml
 
-- name: Import cloud-init playbook
-  ansible.builtin.import_playbook: cloud_init.yml
-
 - name: Import UFW playbook
   ansible.builtin.import_playbook: ufw.yml
 
