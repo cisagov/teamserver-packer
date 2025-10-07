@@ -20,6 +20,9 @@
 - color: 0366d6
   description: Pull requests that update a dependency file
   name: dependencies
+- color: 2497ed
+  description: Pull requests that update Docker code
+  name: docker
 - color: 5319e7
   description: This issue or pull request improves or adds to documentation
   name: documentation
@@ -56,6 +59,9 @@
 - color: 02a8ef
   description: Pull requests that update Packer code
   name: packer
+- color: 3772a4
+  description: Pull requests that update Python code
+  name: python
 - color: ef476c
   description: This issue is a request for information or needs discussion
   name: question
