@@ -1,6 +1,8 @@
 # teamserver-packer 🧰📦 #
 
 [![GitHub Build Status](https://github.com/cisagov/teamserver-packer/workflows/build/badge.svg)](https://github.com/cisagov/teamserver-packer/actions)
+[![License](https://img.shields.io/github/license/cisagov/teamserver-packer)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/teamserver-packer/workflows/CodeQL/badge.svg)](https://github.com/cisagov/teamserver-packer/actions/workflows/codeql-analysis.yml)
 
 This project can be used to build a Debian Bookworm AMI with [Cobalt
 Strike](https://www.cobaltstrike.com/) installed.
