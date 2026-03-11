@@ -25,6 +25,9 @@ collections:
   # - ansible-role-ufw (uses community.general.ufw)
   # - ansible-role-xfce-cool (uses community.general.sudosu and
   #   community.general.xml)
+  #
+  # Also required by the following playbooks:
+  # - ansible/ufw.yml (uses community.general.ufw)
   - community.general
 roles:
   - name: amazon_efs_utils
