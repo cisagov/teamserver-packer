@@ -29,3 +29,6 @@
 # a user created in the VNC playbook.
 - name: Import Xfce playbook
   ansible.builtin.import_playbook: xfce.yml
+
+- name: Import Wazuh agent playbook
+  ansible.builtin.import_playbook: wazuh_agent.yml
