@@ -4,14 +4,14 @@
 # role install to install collections and roles from it.  Note that
 # either (or both) can be an empty list, e.g., collections: [].
 collections:
-  # Required by the following playbooks:
+  # Required by the following Ansible roles:
+  # - ansible-role-cobalt-strike (uses amazon.aws.s3_object and
+  #   amazon.aws.ssm_parameter)
+  #
+  # Also required by the following playbooks:
   # - ansible/vnc.yml (uses amazon.aws.ssm_parameter)
   # - ansible/wazuh_agent.yml (uses amazon.aws.ssm_parameter)
   # - ansible/xfce.yml (uses amazon.aws.ssm_parameter)
-  #
-  # Also required by the following Ansible roles:
-  # - ansible-role-cobalt-strike (uses amazon.aws.s3_object and
-  #   amazon.aws.ssm_parameter)
   - amazon.aws
   # Required by the following Ansible roles:
   # - ansible-role-amazon-efs-utils (uses community.general.json_query
