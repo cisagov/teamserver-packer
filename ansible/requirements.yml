@@ -5,8 +5,7 @@
 # either (or both) can be an empty list, e.g., collections: [].
 collections:
   # Required by the following Ansible roles:
-  # - ansible-role-cobalt-strike (uses amazon.aws.s3_object and
-  #   amazon.aws.ssm_parameter)
+  # - ansible-role-cobalt-strike (uses amazon.aws.s3_object)
   #
   # Also required by the following playbooks:
   # - ansible/vnc.yml (uses amazon.aws.ssm_parameter)
