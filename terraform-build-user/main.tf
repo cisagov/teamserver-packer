@@ -13,6 +13,8 @@ module "iam_user" {
     "/vnc/password",
     "/vnc/ssh/ed25519_public_key",
     "/vnc/ssh/ed25519_private_key",
+    # Necessary when building any instances that run the Wazuh agent
+    "/wazuh_agent/manager",
   ]
   user_name = "build-teamserver-packer"
 }
